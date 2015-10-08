@@ -6,6 +6,7 @@ require 'pliny/sidekiq/version'
 Gem::Specification.new do |spec|
   spec.name          = "pliny-sidekiq"
   spec.version       = Pliny::Sidekiq::VERSION
+  spec.license       = 'MIT'
   spec.authors       = ["Guðmundur Bjarni Ólafsson"]
   spec.email         = ["gudmundur.bjarni@gmail.com"]
 
