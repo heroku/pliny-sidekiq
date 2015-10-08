@@ -37,5 +37,25 @@ describe Pliny::Sidekiq::Middleware::Client::Log do
 
     call_middleware
   end
+
+  context "with enqueued_at missing" do
+    let(:msg) do
+      {
+        'class' => class_name,
+        'jid' => jid
+      }
+    end
+
+    it 'logs' do
+      expect(Pliny).to receive(:log)
+        .with(hash_including(
+          job:    class_name,
+          job_id: jid
+        ))
+        .once
+
+      call_middleware
+    end
+  end
 end
 
