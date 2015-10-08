@@ -11,6 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["gudmundur.bjarni@gmail.com"]
 
   spec.summary       = %q{Pliny logging and request_id support for Sidekiq}
+  spec.description   = %q{Pliny logging and request_id support for Sidekiq}
   spec.homepage      = "https://github.com/gudmundur/pliny-sidekiq"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
