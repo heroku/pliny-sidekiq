@@ -1,6 +1,10 @@
 module Pliny::Sidekiq::Middleware
   module Server
     class Log
+      def initialize(metric_prefix: nil)
+        @metric_prefix = metric_prefix
+      end
+
       def call(worker, job, queue)
         context = {
           sidekiq: true,
@@ -17,8 +21,14 @@ module Pliny::Sidekiq::Middleware
         end
       end
 
+      private
+
       def count(key, value=1)
-        Pliny.log("count#kolkrabbi.sidekiq.#{key}" => value)
+        Pliny.log("count##{metric_prefix}sidekiq.#{key}" => value)
+      end
+
+      def metric_prefix
+        @metric_prefix.nil? ? '' : "#{@metric_prefix}."
       end
     end
   end

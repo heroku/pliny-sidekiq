@@ -1,13 +1,15 @@
 require 'spec_helper'
 
 describe Pliny::Sidekiq::Middleware::Server::Log do
-  let(:middleware) { described_class.new }
+  let(:middleware) { described_class.new(options) }
 
   let(:jid)        { SecureRandom.uuid }
   let(:class_name) { 'Class' }
   let(:job_retry)  { 1 }
 
-  let(:worker)     { double('worker') }
+  let(:options)    { {} }
+
+  let(:worker)     { double('worker', class: class_name) }
   let(:job)        { { 'jid' => jid, 'class' => class_name, 'retry' => job_retry } }
   let(:queue)      { 'queue:default' }
 
@@ -37,6 +39,16 @@ describe Pliny::Sidekiq::Middleware::Server::Log do
     call_middleware
   end
 
+  it 'counts with no metric_prefix' do
+    allow(Pliny).to receive(:log)
+
+    expect(Pliny).to receive(:log)
+      .with(hash_including("count#sidekiq.worker.#{class_name}" => 1))
+      .once
+
+    call_middleware
+  end
+
   it 'logs the job and retries' do
     expect(middleware).to receive(:count).twice
 
@@ -45,6 +57,20 @@ describe Pliny::Sidekiq::Middleware::Server::Log do
       .once
 
     call_middleware
+  end
+
+  context "with a metric_prefix" do
+    let(:options) { { metric_prefix: 'my-app' } }
+
+    it 'counts with the metric_prefix' do
+      allow(Pliny).to receive(:log)
+
+      expect(Pliny).to receive(:log)
+        .with(hash_including("count#my-app.sidekiq.worker.#{class_name}" => 1))
+        .once
+
+      call_middleware
+    end
   end
 end
 
