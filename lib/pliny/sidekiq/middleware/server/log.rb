@@ -8,6 +8,7 @@ module Pliny::Sidekiq::Middleware
       def call(worker, job, queue)
         context = {
           sidekiq: true,
+          job:     job['class'],
           job_id:  job['jid'],
         }
 

@@ -49,8 +49,9 @@ describe Pliny::Sidekiq::Middleware::Client::Log do
     it 'logs' do
       expect(Pliny).to receive(:log)
         .with(hash_including(
-          job:    class_name,
-          job_id: jid
+          sidekiq: true,
+          job:     class_name,
+          job_id:  jid
         ))
         .once
 

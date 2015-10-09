@@ -4,6 +4,7 @@ module Pliny::Sidekiq::Middleware
       def call(worker_class, msg, queue, redis_pool)
         yield.tap do
           data = {
+            sidekiq:  true,
             job:      msg['class'],
             job_id:   msg['jid'],
             enqueued: true

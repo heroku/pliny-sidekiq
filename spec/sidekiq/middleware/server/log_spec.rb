@@ -21,7 +21,7 @@ describe Pliny::Sidekiq::Middleware::Server::Log do
 
   it 'sets a log context' do
     expect(Pliny).to receive(:context)
-      .with(hash_including(sidekiq: true, job_id: jid))
+      .with(hash_including(sidekiq: true, job: class_name, job_id: jid))
       .once
 
     call_middleware
