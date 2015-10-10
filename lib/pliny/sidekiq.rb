@@ -1,4 +1,5 @@
 require "pliny/sidekiq/version"
+require "pliny/sidekiq/endpoints/health"
 require "pliny/sidekiq/middleware/client/log"
 require "pliny/sidekiq/middleware/client/request_id"
 require "pliny/sidekiq/middleware/server/log"
