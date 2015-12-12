@@ -4,6 +4,7 @@ Sidekiq middlewares for making life nicer when using Pliny
 
  - Passes `request_id`s to and between jobs.
  - logfmts when jobs are enqueued and being processed.
+ - Health endpoints for tracking queue latency and depth.
 
 ## Installation
 
