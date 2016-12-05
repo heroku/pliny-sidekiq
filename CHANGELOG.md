@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Pliny `0.18.0` or greater is now required.
-- Metrics reporting for job queue counts now use the `Pliny::Metrics` API.
+- Metrics reporting for job and queue counts now use the `Pliny::Metrics` API.
 
 ### Removed
 - the `metrics-prefix` option is no longer supported for
