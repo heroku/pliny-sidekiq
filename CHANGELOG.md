@@ -12,5 +12,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Metrics reporting for job and queue counts now use the `Pliny::Metrics` API.
 
 ### Removed
-- the `metrics-prefix` option is no longer supported for
-  `Pliny::Sidekiq::Middleware::Server::Log`.
+- Options for `Pliny::Sidekiq::Middleware::Server::Log` are no longer
+  supported, including `metric_prefix`.
