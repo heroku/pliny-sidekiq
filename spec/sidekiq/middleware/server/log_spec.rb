@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Pliny::Sidekiq::Middleware::Server::Log do
-  let(:middleware) { described_class.new(options) }
+  let(:middleware) { described_class.new }
 
   let(:jid)        { SecureRandom.uuid }
   let(:class_name) { 'Class' }
