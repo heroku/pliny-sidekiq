@@ -29,7 +29,7 @@ Create a `config/initializers/sidekiq.rb` and with the following contents
 Sidekiq.configure_server do |config|
   config.server_middleware do |chain|
     chain.add Pliny::Sidekiq::Middleware::Server::RequestId
-    chain.add Pliny::Sidekiq::Middleware::Server::Log, metric_prefix: 'my-app'
+    chain.add Pliny::Sidekiq::Middleware::Server::Log
   end
 
   config.client_middleware do |chain|
