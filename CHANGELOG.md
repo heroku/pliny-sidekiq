@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-### Added
+
+## 0.2.0
 
 ### Changed
 - Pliny `0.18.0` or greater is now required.
