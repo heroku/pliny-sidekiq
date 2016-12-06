@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Pliny::Sidekiq::Middleware::Server::Log do
-  let(:middleware) { described_class.new(options) }
+  let(:middleware) { described_class.new }
 
   let(:jid)        { SecureRandom.uuid }
   let(:class_name) { 'Class' }
@@ -16,6 +16,7 @@ describe Pliny::Sidekiq::Middleware::Server::Log do
   subject(:call_middleware) { middleware.call(worker, job, queue) { } }
 
   it 'yields' do
+    allow(Pliny::Metrics).to receive(:count)
     expect { |b| middleware.call(worker, job, queue, &b) }.to yield_with_no_args
   end
 
@@ -39,11 +40,11 @@ describe Pliny::Sidekiq::Middleware::Server::Log do
     call_middleware
   end
 
-  it 'counts with no metric_prefix' do
-    allow(Pliny).to receive(:log)
+  it 'counts worker metrics' do
+    allow(Pliny::Metrics).to receive(:count)
 
-    expect(Pliny).to receive(:log)
-      .with(hash_including("count#sidekiq.worker.#{class_name}" => 1))
+    expect(Pliny::Metrics).to receive(:count)
+      .with("sidekiq.worker.#{class_name}", 1)
       .once
 
     call_middleware
@@ -57,20 +58,6 @@ describe Pliny::Sidekiq::Middleware::Server::Log do
       .once
 
     call_middleware
-  end
-
-  context "with a metric_prefix" do
-    let(:options) { { metric_prefix: 'my-app' } }
-
-    it 'counts with the metric_prefix' do
-      allow(Pliny).to receive(:log)
-
-      expect(Pliny).to receive(:log)
-        .with(hash_including("count#my-app.sidekiq.worker.#{class_name}" => 1))
-        .once
-
-      call_middleware
-    end
   end
 end
 
