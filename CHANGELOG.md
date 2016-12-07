@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 0.2.1
+
 ### Fixed
 - A bug that prevented the server logging middleware from being initialized
   through chain.add.
