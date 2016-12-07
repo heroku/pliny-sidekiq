@@ -1,6 +1,9 @@
 module Pliny::Sidekiq::Middleware
   module Server
     class Log
+      def initialize(_opts={})
+      end
+
       def call(worker, job, queue)
         context = {
           sidekiq: true,
