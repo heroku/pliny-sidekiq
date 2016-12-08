@@ -44,7 +44,7 @@ describe Pliny::Sidekiq::Middleware::Server::Log do
     allow(Pliny::Metrics).to receive(:count)
 
     expect(Pliny::Metrics).to receive(:count)
-      .with("sidekiq.worker.#{class_name}", 1)
+      .with("sidekiq.worker.#{class_name}", value: 1)
       .once
 
     call_middleware
