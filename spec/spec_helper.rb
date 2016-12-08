@@ -6,11 +6,17 @@ Bundler.require
 
 require "pliny"
 require "sidekiq"
+require "sidekiq/testing"
+require "rack/test"
 # require "timecop"
 
 require_relative "../lib/pliny/sidekiq"
 
+Sidekiq::Testing.fake!
+
 RSpec.configure do |config|
+  config.include Rack::Test::Methods
+
   config.run_all_when_everything_filtered = true
   config.filter_run :focus
 

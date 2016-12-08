@@ -4,6 +4,7 @@ Sidekiq middlewares for making life nicer when using Pliny
 
  - Passes `request_id`s to and between jobs.
  - logfmts when jobs are enqueued and being processed.
+ - Health endpoints for tracking queue latency and depth.
 
 ## Installation
 
@@ -44,6 +45,12 @@ Sidekiq.configure_client do |config|
     chain.add Pliny::Sidekiq::Middleware::Client::Log
   end
 end
+```
+
+To enable the `GET /health/sidekiq` health endpoint add the following to your `lib/routes.rb`
+
+```ruby
+mount Pliny::Sidekiq::Endpoints::Health
 ```
 
 ## Development
