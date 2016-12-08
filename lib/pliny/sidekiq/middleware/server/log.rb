@@ -24,7 +24,7 @@ module Pliny::Sidekiq::Middleware
       private
 
       def count(key, value=1)
-        Pliny::Metrics.count("sidekiq.#{key}", value)
+        Pliny::Metrics.count("sidekiq.#{key}", value: value)
       end
     end
   end
