@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 0.2.2
+
 ### Fixed
 
 - A bug that prevented counts from being tracked
