@@ -14,7 +14,7 @@ describe Pliny::Sidekiq::JobLogger do
     expect { |b| job_logger.call(job, queue, &b) }.to yield_with_no_args
   end
 
-  it 'logs the job start and finish' do
+  it 'logs the job start and finish without errors' do
     expect(Pliny).to receive(:log)
       .with(
         hash_including(
@@ -44,5 +44,37 @@ describe Pliny::Sidekiq::JobLogger do
 
     job_logger.call(job, queue) { }
   end
-end
 
+  it 'logs the job start and finis with errors' do
+    expect(Pliny).to receive(:log)
+      .with(
+        hash_including(
+          sidekiq: true,
+          job: class_name,
+          job_jid: jid,
+          job_retry: job_retry,
+          job_logger: true,
+          at: :start
+        )
+      )
+      .once
+
+    expect(Pliny).to receive(:log)
+      .with(
+        hash_including(
+          sidekiq: true,
+          job: class_name,
+          job_jid: jid,
+          job_retry: job_retry,
+          job_logger: true,
+          at: :finish,
+          status: :fail,
+        )
+      )
+      .once
+
+    expect do
+      job_logger.call(job, queue) { raise StandardError }
+    end.to raise_error(StandardError)
+  end
+end
