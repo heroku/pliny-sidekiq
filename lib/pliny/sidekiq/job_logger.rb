@@ -4,7 +4,7 @@ module Pliny::Sidekiq
       context = {
         sidekiq: true,
         job:     job['class'],
-        job_jid:  job['jid'],
+        job_id:  job['jid'],
         job_retry: job['retry'],
       }
 
