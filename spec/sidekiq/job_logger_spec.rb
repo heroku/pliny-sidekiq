@@ -20,7 +20,7 @@ describe Pliny::Sidekiq::JobLogger do
         hash_including(
           sidekiq: true,
           job: class_name,
-          job_jid: jid,
+          job_id: jid,
           job_retry: job_retry,
           job_logger: true,
           at: :start
@@ -33,7 +33,7 @@ describe Pliny::Sidekiq::JobLogger do
         hash_including(
           sidekiq: true,
           job: class_name,
-          job_jid: jid,
+          job_id: jid,
           job_retry: job_retry,
           job_logger: true,
           at: :finish,
@@ -51,7 +51,7 @@ describe Pliny::Sidekiq::JobLogger do
         hash_including(
           sidekiq: true,
           job: class_name,
-          job_jid: jid,
+          job_id: jid,
           job_retry: job_retry,
           job_logger: true,
           at: :start
@@ -64,7 +64,7 @@ describe Pliny::Sidekiq::JobLogger do
         hash_including(
           sidekiq: true,
           job: class_name,
-          job_jid: jid,
+          job_id: jid,
           job_retry: job_retry,
           job_logger: true,
           at: :finish,
