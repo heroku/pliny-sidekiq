@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "pliny", ">= 0.18.0"
-  spec.add_dependency "sidekiq", "<= 6.0.0"
+  spec.add_dependency "sidekiq", ">= 6.0.1", "< 7.0.0"
 
   spec.add_development_dependency "pry"
   spec.add_development_dependency "pry-byebug"

@@ -1,5 +1,9 @@
 module Pliny::Sidekiq
   class JobLogger
+    def prepare(job)
+      yield
+    end
+
     def call(job, queue)
       context = {
         sidekiq: true,
