@@ -11,7 +11,7 @@ describe Pliny::Sidekiq::JobLogger do
   let(:queue)      { 'queue:default' }
 
   it 'prepare yields' do
-    expect { |b| job_logger.prepare(job, &b) }.to yield_with_no_args
+    expect { |b| job_logger.prepare(job, &b) }.to yield_with_args job
   end
 
   it 'call yields' do
