@@ -1,5 +1,11 @@
 module Pliny::Sidekiq
   class JobLogger
+
+    # As of Sidekiq `6.0.1`, `prepare` is part of the logger API. We just need to call the block defined in Sidekiq itself.
+    def prepare(job)
+      yield job
+    end
+
     def call(job, queue)
       context = {
         sidekiq: true,

@@ -10,7 +10,11 @@ describe Pliny::Sidekiq::JobLogger do
   let(:job)        { { 'jid' => jid, 'class' => class_name, 'retry' => job_retry } }
   let(:queue)      { 'queue:default' }
 
-  it 'yields' do
+  it 'prepare yields' do
+    expect { |b| job_logger.prepare(job, &b) }.to yield_with_args job
+  end
+
+  it 'call yields' do
     expect { |b| job_logger.call(job, queue, &b) }.to yield_with_no_args
   end
 
